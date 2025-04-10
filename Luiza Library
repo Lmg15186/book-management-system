@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+
+class Book {
+private:
+    string title;
+    string author;
+    string isbn;
+    bool available;
+
+public:
+    void setBookDetails(string t, string a, string i, bool avail) {
+        title = t;
+        author = a;
+        isbn = i;
+        available = avail;
+    }
+
+    void displayBookDetails() {
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "ISBN: " << isbn << endl;
+        cout << "Availability: " << (available ? "Available" : "Borrowed") << endl;
+        cout << "------------------------" << endl;
+    }
+
+    bool isAvailable() {
+        return available;
+    }
+
+    string getISBN() {
+        return isbn;
+    }
+
+    void borrowBook() {
+        if (available) {
+            available = false;
+            cout << "The book \"" << title << "\" has been successfully borrowed." << endl;
+        }
+        else {
+            cout << "Sorry, the book \"" << title << "\" is already borrowed." << endl;
+        }
+    }
+};
+
+int main() {
+    Book library[5];
+
+    // Initial books
+    library[0].setBookDetails("Astrology For The Soul", "Jan Spiller", "111", true);
+    library[1].setBookDetails("Dom Casmurro", "Machado de Assis", "222", true);
+    library[2].setBookDetails("The Alchemist", "Paulo Coelho", "333", true);
+    library[3].setBookDetails("Harry Potter", "J.K. Rowling", "444", true);
+    library[4].setBookDetails("The Tarot Bible", "Sarah Bartlett", "555", true);
+
+    string inputISBN;
+
+    while (true) {
+        cout << "\nCurrent library status:\n";
+        for (int i = 0; i < 5; i++) {
+            library[i].displayBookDetails();
+        }
+
+        cout << "Enter ISBN to borrow a book (or 0 to exit): ";
+        cin >> inputISBN;
+
+        if (inputISBN == "0") break;
+
+        bool found = false;
+        for (int i = 0; i < 5; i++) {
+            if (library[i].getISBN() == inputISBN) {
+                library[i].borrowBook();
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            cout << "Book with ISBN " << inputISBN << " not found in the library." << endl;
+        }
+    }
+
+    return 0;
+}
