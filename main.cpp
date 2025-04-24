@@ -1,18 +1,34 @@
-Book arrayAsc[3] = {
-    Book("A Tale of Two Cities", "Charles Dickens", "001", true, "2023-01-01"),
-    Book("Moby Dick", "Herman Melville", "002", true, "2023-01-02"),
-    Book("War and Peace", "Leo Tolstoy", "003", true, "2023-01-03")
-};
+#include "Book.h"
+#include "DigitalBook.h"
+#include "Hardcopy.h"
+#include "UserInterface.h"
 
-Book arrayDesc[3] = {
-    Book("War and Peace", "Leo Tolstoy", "003", true, "2023-01-03"),
-    Book("Moby Dick", "Herman Melville", "002", true, "2023-01-02"),
-    Book("A Tale of Two Cities", "Charles Dickens", "001", true, "2023-01-01")
-};
+int main() {
+    vector<Book*> booksAsc = {
+        new Hardcopy("The Alchemist", "Paulo Coelho", "333", true, "2024-01-10"),
+        new DigitalBook("Dom Casmurro", "Machado de Assis", "222", true, "2024-01-12"),
+        new Hardcopy("Harry Potter", "J.K. Rowling", "444", true, "2024-01-15")
+    };
 
-Book arrayMixed[3] = {
-    Book("Moby Dick", "Herman Melville", "002", true, "2023-01-02"),
-    Book("A Tale of Two Cities", "Charles Dickens", "001", true, "2023-01-01"),
-    Book("War and Peace", "Leo Tolstoy", "003", true, "2023-01-03")
-};
+    vector<Book*> booksDesc = {
+        new Hardcopy("Harry Potter", "J.K. Rowling", "444", true, "2024-01-15"),
+        new DigitalBook("Dom Casmurro", "Machado de Assis", "222", true, "2024-01-12"),
+        new Hardcopy("The Alchemist", "Paulo Coelho", "333", true, "2024-01-10")
+    };
 
+    vector<Book*> booksMixed = {
+        new DigitalBook("Dom Casmurro", "Machado de Assis", "222", true, "2024-01-12"),
+        new Hardcopy("The Alchemist", "Paulo Coelho", "333", true, "2024-01-10"),
+        new Hardcopy("Harry Potter", "J.K. Rowling", "444", true, "2024-01-15")
+    };
+
+    cout << "\nBefore Sorting (Mixed Order):\n";
+    for (Book* book : booksMixed) book->displayBookDetails();
+
+    UserInterface::sortBooksByTitle(booksMixed);
+
+    cout << "\nAfter Sorting (Mixed Order):\n";
+    for (Book* book : booksMixed) book->displayBookDetails();
+
+    return 0;
+}
