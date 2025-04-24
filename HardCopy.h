@@ -1,16 +1,16 @@
-// hardcopy.h
 #ifndef HARDCOPY_H
 #define HARDCOPY_H
-
-#include "book.h"
+#include "Book.h"
 
 class Hardcopy : public Book {
-private:
-    int pages;
-
 public:
-    Hardcopy(string t, string a, string i, bool av, string d, int p);
-    void display() override;
+    Hardcopy(string t, string a, string i, bool avail, string d)
+        : Book(t, a, i, avail, d) {}
+
+    void displayBookDetails() override {
+        cout << "[Hardcopy] ";
+        Book::displayBookDetails();
+    }
 };
 
 #endif
