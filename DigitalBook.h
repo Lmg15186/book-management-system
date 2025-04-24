@@ -1,16 +1,16 @@
-// digitalbook.h
 #ifndef DIGITALBOOK_H
 #define DIGITALBOOK_H
-
-#include "book.h"
+#include "Book.h"
 
 class DigitalBook : public Book {
-private:
-    double fileSize;
-
 public:
-    DigitalBook(string t, string a, string i, bool av, string d, double f);
-    void display() override;
+    DigitalBook(string t, string a, string i, bool avail, string d)
+        : Book(t, a, i, avail, d) {}
+
+    void displayBookDetails() override {
+        cout << "[Digital] ";
+        Book::displayBookDetails();
+    }
 };
 
 #endif
